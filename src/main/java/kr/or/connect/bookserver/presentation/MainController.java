@@ -35,7 +35,7 @@ public class MainController {
 		if(shortUrl == null) {
 			log.info("there is no available short url.");
 			// TODO : redirect to 404
-			return "index";
+			return "redirect:/";
 		} else {
 			String originalUrl = shortUrl.getOriginalUrl();
 			log.info("redirect to : {}" + shortUrl);
