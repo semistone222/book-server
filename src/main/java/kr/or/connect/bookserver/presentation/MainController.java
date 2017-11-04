@@ -29,13 +29,17 @@ public class MainController {
 		return "index";
 	}
 	
-	// TODO : error
-//	@GetMapping("/{shortenedUrl}")
-//	void redirect(@PathVariable("shortenedUrl") String shortenedUrl) {
-//		ShortUrl shortUrl = service.findByShortenedUrl(shortenedUrl);
-//		String originalUrl = shortUrl.getOriginalUrl();
-//		 TODO : redirect to original url when requested using shortened url
-//		log.info("redirect to : {}" + shortUrl);
-//	}
-
+	@GetMapping("/{shortenedUrl}")
+	String redirect(@PathVariable("shortenedUrl") String shortenedUrl) {
+		ShortUrl shortUrl = service.findByShortenedUrl(shortenedUrl);
+		if(shortUrl == null) {
+			log.info("there is no available short url.");
+			// TODO : redirect to 404
+			return "index";
+		} else {
+			String originalUrl = shortUrl.getOriginalUrl();
+			log.info("redirect to : {}" + shortUrl);
+			return "redirect:" + originalUrl;
+		}
+	}
 }
