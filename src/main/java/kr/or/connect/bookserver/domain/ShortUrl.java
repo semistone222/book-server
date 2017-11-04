@@ -18,6 +18,7 @@ public class ShortUrl {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String originalUrl;
+	// TODO : shortenedUrl is not too good naming to save like 'EXSvs' rather than 'localhost:8080/ExSvs'
 	private String shortenedUrl;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt = new Date();
