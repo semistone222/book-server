@@ -42,6 +42,7 @@ public class MainController {
 	
 	@GetMapping("/{shortened}")
 	String redirect(@PathVariable("shortened") String shortened, RedirectAttributes redirectAttributes) {
+		log.info("shortened : " + shortened);
 		ShortUrl shortUrl = service.findByShortenedUrl(shortened);
 		if(shortUrl == null) {
 			log.info("there is no available short url.");
@@ -50,6 +51,7 @@ public class MainController {
 		} else {
 			String originalUrl = shortUrl.getOriginalUrl();
 			log.info("redirect to : {}" + shortUrl);
+			// TODO : if originalUrl is not good, then redirect to this again. how to fix?
 			return "redirect:" + originalUrl;
 		}
 	}
