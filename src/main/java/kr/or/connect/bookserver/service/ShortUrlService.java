@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.connect.bookserver.domain.ShortUrl;
 import kr.or.connect.bookserver.persistence.ShortUrlRepository;
+import kr.or.connect.bookserver.util.Base62;
 
 @Service
 public class ShortUrlService {
@@ -27,5 +28,14 @@ public class ShortUrlService {
 	
 	public ShortUrl create(ShortUrl shortUrl) {
 		return shortUrlRepository.save(shortUrl);
+	}
+	
+	public ShortUrl create(String originalUrl) {
+		ShortUrl shortUrl = new ShortUrl();
+		shortUrl.setOriginalUrl(originalUrl);
+		shortUrl = shortUrlRepository.save(shortUrl);
+		shortUrl.setShortenedUrl(Base62.base62(shortUrl.getId()));
+		shortUrl = shortUrlRepository.save(shortUrl);
+		return shortUrl;
 	}
 }

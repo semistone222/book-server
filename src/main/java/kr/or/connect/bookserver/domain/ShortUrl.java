@@ -20,7 +20,7 @@ public class ShortUrl {
 	private String originalUrl;
 	private String shortenedUrl;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdAt;
+	private Date createdAt = new Date();
 	
 	public Long getId() {
 		return id;
